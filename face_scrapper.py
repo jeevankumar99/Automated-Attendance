@@ -6,9 +6,7 @@ import os
 import face_recognition
 from face_recognition.api import face_encodings
 
-def extract_faces(image_path):
-
-    input_image = face_recognition.load_image_file(image_path)
+def extract_faces(input_image):
 
     # Convert input image to RGB
     input_image = cv2.cvtColor(input_image,cv2.COLOR_BGR2RGB)
@@ -20,8 +18,6 @@ def extract_faces(image_path):
    # Draw rectangle around detected faces.
     for face in faces_location:
         cv2.rectangle(output_image, (face[3], face[0]),(face[1], face[2]), (255,0,255), 2)
-    cv2.imshow('Detected Faces', output_image)
-    cv2.waitKey(0)
 
     faces_encodings = face_recognition.face_encodings(input_image)
     return (faces_encodings, faces_location)
